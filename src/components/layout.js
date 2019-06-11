@@ -12,6 +12,10 @@ import { StaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 
+import Container from "react-bootstrap/Container"
+
+import bgImg from "../images/dust_scratches.png"
+
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
@@ -24,24 +28,30 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </div>
-      </>
+      <div
+        style={{
+          backgroundImage: `url(${bgImg})`,
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+        }}
+      >
+        <Container>
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div
+            className="text-center"
+            style={{
+              margin: `0px auto`,
+              padding: `2rem 20px 2rem`,
+              backgroundColor: `white`,
+            }}
+          >
+            <main>{children}</main>
+          </div>
+        </Container>
+      </div>
     )}
   />
 )
